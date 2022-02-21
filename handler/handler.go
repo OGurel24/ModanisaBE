@@ -18,9 +18,10 @@ func CreateNewController(service *service.Service) *Controller {
 }
 
 func (c *Controller) MainController(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Headers", "Authorization")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	header := w.Header()
+	header.Add("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS, PUT")
+	header.Add("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With")
+	header.Add("Access-Control-Allow-Origin", "http://localhost:8080")
 
 	if r.Method == http.MethodGet {
 		w.WriteHeader(http.StatusOK)
@@ -34,7 +35,7 @@ func (c *Controller) MainController(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method == http.MethodPut {
-		w.WriteHeader(http.StatusOK)
+		w.WriteHeader(http.StatusCreated)
 		item, err := ioutil.ReadAll(r.Body)
 		if err != nil {
 			log.Println(err)
@@ -42,5 +43,5 @@ func (c *Controller) MainController(w http.ResponseWriter, r *http.Request) {
 		c.service.AddItem(string(item))
 		return
 	}
-	w.WriteHeader(http.StatusMethodNotAllowed)
+	w.WriteHeader(http.StatusNoContent)
 }

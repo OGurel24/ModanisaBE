@@ -7,21 +7,24 @@ import (
 )
 
 func TestInitialDoList(t *testing.T) {
-	DoList := *repository.getList()
+	DoList := repository.CreateNewList()
 
 	testCases := []struct {
 		description   string
 		expectedValue string
+		length        int
 	}{
 		{
-			description:   "there should be 1 member of the initial list",
+			description:   "There should be 1 member of the initial list",
 			expectedValue: "Achieve Modanisa Bootcamp assignment",
+			length:        1,
 		},
 	}
 
 	for _, testCase := range testCases {
 		t.Run(testCase.description, func(t *testing.T) {
-			assert.Equal(t, 1, len(DoList))
+			assert.Equal(t, testCase.length, len(DoList.Items))
+			assert.Equal(t, testCase.expectedValue, DoList.Items[0])
 		})
 	}
 }

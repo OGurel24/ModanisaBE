@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestAddItem(t *testing.T) {
+func TestService_AddItem(t *testing.T) {
 	s := service.CreateNewService(repository.CreateNewList())
 
 	initialItemCount := len(s.Data.Items)
@@ -27,6 +27,31 @@ func TestAddItem(t *testing.T) {
 		s = s.AddItem("new item")
 		t.Run(testCase.Description, func(t *testing.T) {
 			assert.Equal(t, len(s.Data.Items), testCase.LastItemCount)
+		})
+	}
+}
+
+func TestService_GetItems(t *testing.T) {
+
+	testCases := []struct {
+		Description string
+		Items       []string
+	}{
+		{
+			Description: "Empty list should return 0 element string slice",
+			Items:       nil,
+		},
+		{
+			Description: "List with elements should return all elements as string slice",
+			Items:       []string{"Wake Up", "Work", "Sleep", "Repeat"},
+		},
+	}
+
+	for _, testCase := range testCases {
+		s := service.CreateNewService(repository.CreateNewList())
+		s.Data.Items = testCase.Items
+		t.Run(testCase.Description, func(t *testing.T) {
+			assert.Equal(t, testCase.Items, s.GetItems())
 		})
 	}
 }

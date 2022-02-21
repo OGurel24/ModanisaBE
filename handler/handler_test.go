@@ -2,13 +2,15 @@ package handler_test
 
 import (
 	"ModanisaBE/handler"
+	"ModanisaBE/repository"
+	"ModanisaBE/service"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 )
 
-func TestMainController(t *testing.T) {
+func TestHandler_MainController(t *testing.T) {
 
 	testCases := []struct {
 		description  string
@@ -41,7 +43,8 @@ func TestMainController(t *testing.T) {
 	for _, testCase := range testCases {
 		req := httptest.NewRequest(testCase.method, "/", nil)
 		w := httptest.NewRecorder()
-		handler.MainController(w, req)
+		listHandler := handler.CreateNewController(service.CreateNewService(repository.CreateNewList()))
+		listHandler.MainController(w, req)
 		res := w.Result()
 		responseCode := res.StatusCode
 		t.Run(testCase.description, func(t *testing.T) {

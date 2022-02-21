@@ -1,21 +1,16 @@
 package main
 
 import (
-	"fmt"
-	_ "fmt"
+	"ModanisaBE/handler"
+	"ModanisaBE/repository"
+	"log"
 	"net/http"
 )
 
 func main() {
-	http.HandleFunc("/", mainController)
-	err := http.ListenAndServe(":8080", nil)
-	fmt.Println(err)
-}
+	repositoryList := repository.CreateNewList()
+	repositoryList = repositoryList.AddItem("add")
 
-func mainController(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("here")
-	_, err := fmt.Fprintf(w, "User is already exist")
-	if err != nil {
-		fmt.Println(err)
-	}
+	http.HandleFunc("/", handler.MainController)
+	log.Fatalln(http.ListenAndServe(":8080", nil))
 }

@@ -1,16 +1,21 @@
 package repository
 
-type doList struct {
+type DoList struct {
 	Items []string
 }
 
-func CreateNewList() doList {
-	doList := doList{}
+type DoListInterface interface {
+	CreateNewList() DoList
+	AddItem(item string) DoList
+}
+
+func CreateNewList() DoList {
+	doList := DoList{}
 	doList.Items = append(doList.Items, "Achieve Modanisa Bootcamp assignment")
 	return doList
 }
 
-func (l *doList) AddItem(item string) doList {
+func (l *DoList) AddItem(item string) DoList {
 	l.Items = append(l.Items, item)
 	return *l
 }

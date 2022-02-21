@@ -24,7 +24,7 @@ func TestMainController(t *testing.T) {
 		{
 			description: "Post method should return HTTP 417 status code",
 			method:      http.MethodPost,
-			statusCode:  417,
+			statusCode:  405,
 		},
 		{
 			description: "Put method should return HTTP 417 status code",
@@ -34,7 +34,7 @@ func TestMainController(t *testing.T) {
 		{
 			description: "Delete method should return HTTP 200 status code",
 			method:      http.MethodDelete,
-			statusCode:  417,
+			statusCode:  405,
 		},
 	}
 

@@ -28,3 +28,28 @@ func TestInitialDoList(t *testing.T) {
 		})
 	}
 }
+
+func TestAddItem(t *testing.T) {
+	DoList := repository.CreateNewList()
+	DoList = DoList.AddItem("new item")
+
+	testCases := []struct {
+		description   string
+		expectedValue string
+		length        int
+	}{
+		{
+			description:   "There should be 2 member of the list after add operation",
+			expectedValue: "new item",
+			length:        2,
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Run(testCase.description, func(t *testing.T) {
+			length := len(DoList.Items)
+			assert.Equal(t, testCase.length, length)
+			assert.Equal(t, testCase.expectedValue, DoList.Items[length-1])
+		})
+	}
+}

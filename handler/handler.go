@@ -12,12 +12,16 @@ type Controller struct {
 	service service.Service
 }
 
-func CreateNewController(service service.Service) Controller {
-	c := Controller{service: service}
-	return c
+func CreateNewController(service *service.Service) *Controller {
+	c := Controller{service: *service}
+	return &c
 }
 
 func (c *Controller) MainController(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Authorization")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+
 	if r.Method == http.MethodGet {
 		w.WriteHeader(http.StatusOK)
 
@@ -35,7 +39,7 @@ func (c *Controller) MainController(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Println(err)
 		}
-		c.service = c.service.AddItem(string(item))
+		c.service.AddItem(string(item))
 		return
 	}
 	w.WriteHeader(http.StatusMethodNotAllowed)

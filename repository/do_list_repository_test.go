@@ -31,7 +31,7 @@ func TestInitialDoList(t *testing.T) {
 
 func TestAddItem(t *testing.T) {
 	DoList := repository.CreateNewList()
-	DoList = DoList.AddItem("new item")
+	DoList.AddItem("new item")
 
 	testCases := []struct {
 		description   string

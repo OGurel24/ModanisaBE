@@ -9,13 +9,12 @@ type DoListInterface interface {
 	AddItem(item string) DoList
 }
 
-func CreateNewList() DoList {
+func CreateNewList() *DoList {
 	doList := DoList{}
 	doList.Items = append(doList.Items, "Achieve Modanisa Bootcamp assignment")
-	return doList
+	return &doList
 }
 
-func (l *DoList) AddItem(item string) DoList {
+func (l *DoList) AddItem(item string) {
 	l.Items = append(l.Items, item)
-	return *l
 }

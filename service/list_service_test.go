@@ -24,7 +24,7 @@ func TestService_AddItem(t *testing.T) {
 
 	for _, testCase := range testCases {
 		assert.Equal(t, 1, initialItemCount)
-		s = s.AddItem("new item")
+		s.AddItem("new item")
 		t.Run(testCase.Description, func(t *testing.T) {
 			assert.Equal(t, len(s.Data.Items), testCase.LastItemCount)
 		})

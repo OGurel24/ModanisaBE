@@ -14,5 +14,5 @@ func main() {
 	listController := handler.CreateNewController(listService)
 
 	http.HandleFunc("/", listController.MainController)
-	log.Fatalln(http.ListenAndServe(":8080", nil))
+	log.Fatalln(http.ListenAndServe(":8081", nil))
 }

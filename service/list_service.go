@@ -1,21 +1,22 @@
 package service
 
-import "ModanisaBE/repository"
+import (
+	"ModanisaBE/repository"
+)
 
 type Service struct {
 	Data repository.DoList
 }
 
-func CreateNewService(doList repository.DoList) Service {
+func CreateNewService(doList *repository.DoList) *Service {
 	service := Service{
-		Data: doList,
+		Data: *doList,
 	}
-	return service
+	return &service
 }
 
-func (s *Service) AddItem(item string) Service {
-	s.Data = s.Data.AddItem(item)
-	return *s
+func (s *Service) AddItem(item string) {
+	s.Data.AddItem(item)
 }
 
 func (s *Service) GetItems() []string {

@@ -1,18 +1,7 @@
 package main
 
-import (
-	"ModanisaBE/handler"
-	"ModanisaBE/repository"
-	"ModanisaBE/service"
-	"log"
-	"net/http"
-)
+import "ModanisaBE/server"
 
 func main() {
-	listRepository := repository.CreateNewList()
-	listService := service.CreateNewService(listRepository)
-	listController := handler.CreateNewController(listService)
-
-	http.HandleFunc("/", listController.MainController)
-	log.Fatalln(http.ListenAndServe(":8081", nil))
+	server.CreateServer(8081)
 }

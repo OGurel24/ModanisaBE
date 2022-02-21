@@ -11,7 +11,6 @@ type DoListInterface interface {
 
 func CreateNewList() *DoList {
 	doList := DoList{}
-	doList.Items = append(doList.Items, "Achieve Modanisa Bootcamp assignment")
 	return &doList
 }
 

@@ -23,7 +23,7 @@ func TestService_AddItem(t *testing.T) {
 	}
 
 	for _, testCase := range testCases {
-		assert.Equal(t, 1, initialItemCount)
+		assert.Equal(t, 0, initialItemCount)
 		s.AddItem("new item")
 		t.Run(testCase.Description, func(t *testing.T) {
 			assert.Equal(t, len(s.Data.Items), testCase.LastItemCount)
@@ -43,7 +43,7 @@ func TestService_GetItems(t *testing.T) {
 		},
 		{
 			Description: "List with elements should return all elements as string slice",
-			Items:       []string{"Wake Up", "Work", "Sleep", "Repeat"},
+			Items:       []string{"Wake Up", "Work on Modanisa Bootcamp", "Sleep", "Repeat"},
 		},
 	}
 

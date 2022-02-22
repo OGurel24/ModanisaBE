@@ -4,12 +4,12 @@ COPY go.mod .
 COPY go.sum .
 RUN go mod download
 COPY . .
-RUN go build -o /docker-gs-ping
+RUN go build -o /backend
 
 # Production
 FROM gcr.io/distroless/base-debian10
 WORKDIR /
-COPY --from=build /docker-gs-ping /docker-gs-ping
+COPY --from=build /backend /backend
 EXPOSE 8081
 USER nonroot:nonroot
-ENTRYPOINT ["/docker-gs-ping"]
+ENTRYPOINT ["/backend"]

@@ -12,4 +12,5 @@ WORKDIR /
 COPY --from=build /backend /backend
 EXPOSE 8081
 USER nonroot:nonroot
+ENV BROKER_TOKEN=FIIKZQz9LdJsQkrttw5nBQ
 ENTRYPOINT ["/backend"]
